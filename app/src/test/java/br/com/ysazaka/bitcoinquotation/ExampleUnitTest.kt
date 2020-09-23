@@ -1,4 +1,4 @@
-package br.com.db1.bitcoinquotation
+package br.com.ysazaka.bitcoinquotation
 
 import org.junit.Test
 
