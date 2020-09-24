@@ -22,12 +22,6 @@ class MainFragment : Fragment() {
 
     private val viewModel by viewModels<MainViewModel> {viewModelFactory}
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-
-        (requireActivity() as MainActivity).mainComponent.inject(this)
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.main_fragment, container, false)
