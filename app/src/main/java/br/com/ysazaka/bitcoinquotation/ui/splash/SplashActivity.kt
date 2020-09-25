@@ -1,11 +1,12 @@
 package br.com.ysazaka.bitcoinquotation.ui.splash
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import br.com.ysazaka.bitcoinquotation.MainActivity
+import androidx.appcompat.app.AppCompatActivity
 import br.com.ysazaka.bitcoinquotation.R
+import br.com.ysazaka.bitcoinquotation.ui.main.MainActivity
+import com.orhanobut.hawk.Hawk
 
 /**
  * Created by Glauco Sazaka on 23/09/2020
@@ -16,6 +17,7 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
+        if (!Hawk.isBuilt()) Hawk.init(this).build()
         val handler = Handler()
 
         handler.postDelayed({

@@ -1,4 +1,4 @@
-package br.com.ysazaka.bitcoinquotation.data.rest
+package br.com.ysazaka.bitcoinquotation.data.network
 
 import retrofit2.Response
 

@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Bitcoin Quotation</string>
     <string name="splash_screen_image">Splash screen image</string>
+    <string name="last_quotation">Valor da última cotação</string>
 </resources>

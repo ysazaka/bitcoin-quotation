@@ -1,7 +1,6 @@
-package br.com.ysazaka.bitcoinquotation.data.rest
+package br.com.ysazaka.bitcoinquotation.data.network
 
-import android.app.Activity
-import android.widget.Toast
+import android.util.Log
 import androidx.annotation.NonNull
 import br.com.ysazaka.bitcoinquotation.util.Constants
 import com.google.gson.GsonBuilder
@@ -20,10 +19,11 @@ import java.util.concurrent.TimeUnit
 /**
  * Created by Glauco Sazaka on 23/09/2020.
  */
-internal abstract class RESTCallback<T> @JvmOverloads constructor(private val activity: Activity?) : CustomCallback<T>(), Callback<T> {
+internal abstract class RESTCallback<T>: CustomCallback<T>(), Callback<T> {
 
+    val TAG = "RESTCallback"
     protected var errorMessage: String? = ""
-    val rest = retrofit.create(MainApi::class.java)
+    val rest = retrofit.create(Services::class.java)
 
     override fun onResponse(call: Call<T>, response: Response<T>) {
         when (response.code()) {
@@ -54,15 +54,15 @@ internal abstract class RESTCallback<T> @JvmOverloads constructor(private val ac
 
     override fun onFailure(@NonNull call: Call<T>?, @NonNull t: Throwable) {
         if (t is UnknownHostException) {
-            Toast.makeText(activity, "Sem conexão à internet", Toast.LENGTH_SHORT).show()
+            Log.d(TAG, "Sem conexão à internet")
         } else {
-            Toast.makeText(activity, t.message, Toast.LENGTH_SHORT).show()
+            Log.d(TAG, t.message)
         }
     }
 
     override fun onFailure(response: Response<T>) {
         errorMessage = response.message()
-        Toast.makeText(activity, response.message(), Toast.LENGTH_SHORT).show()
+        Log.d(TAG, errorMessage)
     }
 
     override fun onFailureValidation(response: Response<T>) {
@@ -82,10 +82,9 @@ internal abstract class RESTCallback<T> @JvmOverloads constructor(private val ac
             try {
                 val s = e.message
                 val jObjError = JSONObject(s!!.substring(6))
-                Toast.makeText(activity, jObjError.getString("message"), Toast.LENGTH_LONG)
-                    .show()
+                Log.d(TAG, jObjError.getString("message"))
             } catch (ex: Exception) {
-                Toast.makeText(activity, ex.message, Toast.LENGTH_LONG).show()
+                Log.d(TAG, ex.message)
             }
 
         }

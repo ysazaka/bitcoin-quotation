@@ -6,8 +6,10 @@ package br.com.ysazaka.bitcoinquotation.util
 class Constants {
 
     companion object {
-        /* General */
         val BASE_URL = "https://api.blockchain.info/"
+
+        val LAST_QUOTATION = "LAST_QUOTATION"
+        val CHART_ENTRIES = "CHART_ENTRIES"
     }
 
 }
